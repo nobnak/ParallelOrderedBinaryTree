@@ -24,7 +24,7 @@ namespace ParallelOrderedBinaryTreeSystem {
 			prefixes.Clear();
 			prefixes.AddRange(keys);
 
-			Parallel.For(0, keys.Count -1, BuildEach);
+			Parallel.For(0, keys.Count -1, BuildEach, -1);
 		}
 		public IList<uint> Prefixes { get { return new List<uint>(prefixes); } }
 		public IList<uint> Splits { get { return new List<uint>(splits); } }
@@ -38,7 +38,7 @@ namespace ParallelOrderedBinaryTreeSystem {
 			var bk = keys[b];
 			return ak.LengthOfLCP(bk);
 		}
-		protected void BuildEach(int i) {
+		protected void BuildEach(int i, int arg) {
 			var d = System.Math.Sign(LengthOfLCP(i, i + 1) - LengthOfLCP(i, i - 1));
 
 			// limit
